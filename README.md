@@ -3,7 +3,7 @@
 ## Project description
 **Image Classifier** is a deep learning-based project designed to classify images into predefined categories. This project uses Convolutional Neural Networks (CNNs) to identify and classify images based on their visual features. The classifier is built using Python, with libraries like TensorFlow/Keras.
 
-With **Image Classifier** it is possible to:
+With **Image Classifier** is possible to:
 - Use existing models to classify images
 - Train a new model, simply knowing the categories of the model 
 
