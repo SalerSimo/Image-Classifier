@@ -1,28 +1,13 @@
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers
 from PIL import Image, ImageOps
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 
-
-def main():
-    imgHeight = 256
-    imgWidth = 256
-    batchSize = 2
-    directory = 'data'
-    train, validation, classNames = LoadData(imgHeight, imgWidth, batchSize, directory)
-    TrainModel(train, validation, imgHeight, imgWidth)
-    newModel = keras.models.load_model('model/imageclassifier.keras')
-    ClassifieImage(imgHeight, imgWidth, 'catTest.jpg', ['cat', 'dog', 'horse'], newModel)
-    '''TestData(imgHeight, imgWidth, 'catTest.jpg', classNames, newModel)
-    TestData(imgHeight, imgWidth, 'dogTest.jpg', ['cat', 'dog', 'horse'], newModel)
-    TestData(imgHeight, imgWidth, 'horseTest.jpg', ['cat', 'dog', 'horse'], newModel)
-    TestData(imgHeight, imgWidth, 'deerTest.jpg', ['cat', 'dog', 'horse'], newModel)
-    TestData(imgHeight, imgWidth, 'axel.jpg', ['cat', 'dog', 'horse'], newModel)
-    TestData(imgHeight, imgWidth, 'dog.jpg', ['cat', 'dog', 'horse'], newModel)'''
-    return
 
 
 def LoadData(imgHeight, imgWidth, batchSize, directory):
@@ -83,9 +68,6 @@ def TrainModel(train, validation, imgHeight, imgWidth):
 
     model.fit(train, validation_data=validation, epochs=10, verbose=1)
     return model
-    # saveModel = int(input("Do you want to save this model?"))
-    # model.save('model/imageclassifier.keras')
-    # print('Model saved in path model/imageclassifier.keras')
 
 
 def LoadModel(modelPath):
@@ -102,8 +84,4 @@ def ClassifieImage(imgHeight, imgWidth, imagePath, classNames, newModel):
     image = ImageOps.grayscale(image)
     image = np.asarray(image)
     prediction = newModel.predict(np.array([image]))
-    print(f'The image {os.path.split(imagePath)[1]} is', classNames[np.argmax(prediction)])
-
-
-if __name__ == '__main__':
-    main()
+    print(f'\nThe image {os.path.split(imagePath)[1]} is', classNames[np.argmax(prediction)], '\n')
