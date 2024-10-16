@@ -6,7 +6,6 @@ from tensorflow import keras
 from keras import layers
 from PIL import Image, ImageOps
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 
