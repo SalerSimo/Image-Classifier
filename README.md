@@ -41,10 +41,10 @@ With **Image Classifier** is possible to:
 
         ![imgTest1](./README_images/test_1.png)
         I used this image as a test:
-        
+
         ![dog test](./README_images/dogTest.JPG)
 
-        and the result is:
+        The result is:
         ![imgTest2](./README_images/test_2.png)
 
 
