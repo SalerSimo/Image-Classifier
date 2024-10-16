@@ -20,4 +20,16 @@ With **Image Classifier** it is possible to:
     ```bash
     python source/main.py
 2. Select if use an existing model or train a new model
-    ![ciao](./readmeImages/usage1.png)
+    - Use model:
+        - Select the model
+    - Train new model:
+        - Insert categories, **Image Classifier** will automatically train the model with the previously entered categories
+
+    All the models must have the following format:
+
+        CATEGORY-1_CATEGORY-2_..._CATEGORY-N_.keras
+    where ***CATEGORy-1 ... CATEGORY-N*** are the categories the image will be classified into.
+3. Select the image to classify
+    
+
+
