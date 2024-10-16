@@ -1,13 +1,11 @@
 import os
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 import tensorflow as tf
 from tensorflow import keras
+import keras
 from keras import layers
 from PIL import Image, ImageOps
 import numpy as np
-
-
 
 def LoadData(imgHeight, imgWidth, batchSize, directory):
     colorMode = 'grayscale'
@@ -21,7 +19,8 @@ def LoadData(imgHeight, imgWidth, batchSize, directory):
         shuffle=True,
         seed=123,
         validation_split=0.1,
-        subset='training'
+        subset='training', 
+        verbose=False
     )
     validation = keras.preprocessing.image_dataset_from_directory(
         directory=directory,
@@ -33,38 +32,38 @@ def LoadData(imgHeight, imgWidth, batchSize, directory):
         shuffle=True,
         seed=123,
         validation_split=0.1,
-        subset='validation'
+        subset='validation', 
+        verbose=False
     )
-
     def augment(x, y):
         image = tf.image.random_brightness(x, max_delta=0.05)
         return image, y
 
     train = train.map(augment)
+    print("\n")
     return train, validation
 
 
 def TrainModel(train, validation, imgHeight, imgWidth):
     model = keras.Sequential([
+        keras.Input(shape=(imgHeight, imgWidth, 1)),
         layers.Rescaling(1. / 255),
-        layers.Conv2D(16, 3, padding='same', activation='relu', input_shape=(imgHeight, imgWidth)),
+        layers.Conv2D(16, 3, padding='same', activation='relu'),
         layers.MaxPooling2D(),
         layers.Conv2D(32, 3, padding='same', activation='relu'),
         layers.MaxPooling2D(),
         layers.Conv2D(64, 3, padding='same', activation='relu'),
         layers.MaxPooling2D(),
-
         layers.Flatten(),
         layers.Dropout(0.2),
         layers.Dense(128),
-        layers.Dense(units=3)
+        layers.Dense(units=3), 
     ])
     model.compile(
         optimizer=keras.optimizers.Adam(),
         loss=[keras.losses.SparseCategoricalCrossentropy(from_logits=True), ],
         metrics=['accuracy']
     )
-
     model.fit(train, validation_data=validation, epochs=10, verbose=1)
     return model
 

@@ -42,7 +42,6 @@ def removeWrongImages(dataPath, minDimenion):
 def removeFolder(folderPath):
     try:
         shutil.rmtree(folderPath)
-        print(f'Folder {folderPath} successfully removed')
     except:
-        print(f'Folder {folderPath} does not exists')
+        return
 
