@@ -28,7 +28,7 @@ With **Image Classifier** it is possible to:
     All the models must have the following format:
 
         CATEGORY-1_CATEGORY-2_..._CATEGORY-N_.keras
-    where ***CATEGORy-1 ... CATEGORY-N*** are the categories the image will be classified into.
+    where ***CATEGORY-1 ... CATEGORY-N*** are the categories the image will be classified into.
 3. Select the image to classify
     
 
