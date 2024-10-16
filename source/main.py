@@ -5,36 +5,35 @@ import tkinter as tk
 import os
 import pyautogui
 import time
+import sys
 
 workingDirectory = os.getcwd()
-
+imgHeight = 128
+imgWidth = 128
 def main():
     modelsPath = 'models'
-    modelsList = os.listdir(modelsPath)
+    '''modelsList = os.listdir(modelsPath)
     print('\nAvailable models:\n')
     for i, model in enumerate(modelsList):
         print(f' {i}:', model.replace('_ImageClassifier.keras', ''))
-    print('\n')
+    print('\n')'''
     while True:
-        choice = input("Insert 'train' to train a new model \nInsert 'model' to use an already existing model \nInsert 'exit' to exit \n")
+        choice = input("Insert 'train' to train a new model \nInsert 'model' to use an already existing model \nInsert 'exit' to exit \n\n")
         if choice == 'train':
-            imgHeight = int(input('Insert height: '))
-            imgWidth = int(input('Insert width: '))
+            #imgHeight = int(input('Insert image dimension: '))
+            #imgWidth = imgHeight
             model, classes = TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath)
             Prediction(model, classes, imgHeight, imgWidth)
             break
         elif choice == 'model':
             print('Select model')
-            time.sleep(0.75)
+            time.sleep(0.5)
             modelPath = askopenfilename(title="Select model", initialdir='models')
             try:
                 model = image_classifier.LoadModel(modelPath)
                 classes = os.path.split(modelPath)[1]
-                classes = classes.replace('.keras', '')
                 classes = classes.split('_')
-                imgHeight = int(classes[len(classes) - 1].split('x')[0])
-                imgWidth = int(classes[len(classes) - 1].split('x')[1])
-                Prediction(model, classes[:len(classes) - 1], imgHeight, imgWidth)
+                Prediction(model, classes[0:len(classes) - 1], imgHeight, imgWidth)
             except:
                 print('Issue with model loading')
             break
@@ -57,7 +56,7 @@ def TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath):
     for className in classes:
         modelName = modelName + className + '_'
         manage_dataFolder.downloadImagesFromGoogle(keyword=className, limit=50, dataPath=dataPath)
-    modelName += str(imgHeight) + 'x' + str(imgWidth) + '.keras'
+    modelName += '.keras'
     print(modelName)
     manage_dataFolder.removeWrongImages(dataPath, minDimenion=minDimension)
     train, validation = image_classifier.LoadData(imgHeight, imgWidth, batchSize=2, directory=dataPath)
@@ -69,7 +68,7 @@ def TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath):
 
 def Prediction(model, classes, imgHeight, imgWidth):
     print('\nNow select an image\n')
-    time.sleep(0.75)
+    time.sleep(0.5)
     imagePath = askopenfilename(title='Select image')
     while not imagePath:
         input("You have to select a image, press enter to try again")
@@ -79,4 +78,5 @@ def Prediction(model, classes, imgHeight, imgWidth):
 
 
 if __name__ == '__main__':
+    print("\n")
     main()
