@@ -20,4 +20,4 @@ With **Image Classifier** it is possible to:
     ```bash
     python source/main.py
 2. Select if use an existing model or train a new model
-    ![ciao](./readmeImages/Screenshot%202024-10-16%20170710.png)
+    ![ciao](./readmeImages/usage#1.png)
