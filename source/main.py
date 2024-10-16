@@ -1,5 +1,5 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 import image_classifier
@@ -8,7 +8,6 @@ from tkinter.filedialog import askopenfilename
 import tkinter as tk
 import pyautogui
 import time
-import sys
 
 workingDirectory = os.getcwd()
 imgHeight = 128
@@ -49,7 +48,7 @@ def main():
 def TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath):
     dataPath = 'images'
     minDimension = 10000
-    classes = input("Insert classes names: ").upper()
+    classes = input("Insert categories names: ").upper()
     classes = classes.replace(',', '')
     classes = classes.split(' ')
     classes.sort()
@@ -58,7 +57,8 @@ def TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath):
     manage_dataFolder.removeFolder(dataPath)
     for className in classes:
         modelName = modelName + className + '_'
-        manage_dataFolder.downloadImagesFromGoogle(keyword=className, limit=5, dataPath=dataPath)
+        manage_dataFolder.downloadImagesFromGoogle(keyword=className, limit=100, dataPath=dataPath)
+    print("\n")
     modelName += '.keras'
     manage_dataFolder.removeWrongImages(dataPath, minDimenion=minDimension)
     train, validation = image_classifier.LoadData(imgHeight, imgWidth, batchSize=2, directory=dataPath)

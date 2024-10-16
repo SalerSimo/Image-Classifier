@@ -23,7 +23,9 @@ With **Image Classifier** is possible to:
     - Use model:
         - Select the model
     - Train new model:
-        - Insert categories, **Image Classifier** will automatically train the model with the previously entered categories
+        - Insert categories, 
+        
+            **Image Classifier** will automatically download 100 images from google for each category and will use them to train the new model
 
     All the models must have the following format:
 
@@ -31,5 +33,19 @@ With **Image Classifier** is possible to:
     where ***CATEGORY-1 ... CATEGORY-N*** are the categories the image will be classified into.
 3. Select the image to classify
     
+## TESTS
+- ### Train a new model:
+    - Dog and Cat:
+        
+        The first test is made with DOG and CAT. I trained a new model just by inserting *Dog* and *Cat* as categories
+
+        ![imgTest1](./README_images/test_1.png)
+        I used this image as a test:
+        
+        ![dog test](./README_images/dogTest.JPG)
+
+        and the result is:
+        ![imgTest2](./README_images/test_2.png)
+
 
 

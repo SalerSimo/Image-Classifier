@@ -1,7 +1,7 @@
 import os
 import shutil
 from pygoogle_image import image
-
+from PIL import Image, ImageOps
 
 def downloadImagesFromGoogle(keyword, limit, dataPath):
     print(f'downloading {keyword} images...')
@@ -30,10 +30,10 @@ def removeWrongImages(dataPath, minDimenion):
                 ext = image.split('.')  # image is in format imageName.ext
                 ext = ext[len(ext) - 1]
                 if ext not in imageExtensions:
-                    print(f'Image not in extension list {image}')
+                    #print(f'Image not in extension list {image}')
                     os.remove(imagePath)
                 elif os.stat(imagePath).st_size < minDimenion:
-                    print(f"Image too small {image}")
+                    #print(f"Image too small {image}")
                     os.remove(imagePath)
             except:
                 print(f"Issue with image {image}")
