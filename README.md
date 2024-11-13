@@ -33,7 +33,7 @@ With **Image Classifier** is possible to:
     where ***CATEGORY-1 ... CATEGORY-N*** are the categories the image will be classified into.
 3. Select the image to classify
     
-## TESTS
+## TEST
 - ### Train a new model:
     - Dog and Cat:
         

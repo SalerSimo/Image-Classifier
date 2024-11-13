@@ -10,10 +10,12 @@ import pyautogui
 import time
 
 workingDirectory = os.getcwd()
+print(workingDirectory)
+workingDirectory = os.path.split(workingDirectory)[0]
 imgHeight = 128
 imgWidth = 128
 def main():
-    modelsPath = 'models'
+    modelsPath = os.path.join(workingDirectory, 'models')
     '''modelsList = os.listdir(modelsPath)
     print('\nAvailable models:\n')
     for i, model in enumerate(modelsList):
@@ -57,7 +59,8 @@ def TrainAndSaveNewModel(imgHeight, imgWidth, modelsPath):
     manage_dataFolder.removeFolder(dataPath)
     for className in classes:
         modelName = modelName + className + '_'
-        manage_dataFolder.downloadImagesFromGoogle(keyword=className, limit=100, dataPath=dataPath)
+        limit = input("Insert the number of images to download for each category: ")
+        manage_dataFolder.downloadImagesFromGoogle(keyword=className, limit=limit, dataPath=dataPath)
     print("\n")
     modelName += '.keras'
     manage_dataFolder.removeWrongImages(dataPath, minDimenion=minDimension)
