@@ -96,6 +96,4 @@ def MakePrediction(model: ConvNeuralNetwork, image_path: str, class_names: list[
     with torch.no_grad():
         output = model(image)
         _, predicted_class = torch.max(output, 1)
-    print(predicted_class.item())
-    print(class_names)
     return class_names[predicted_class.item()]
