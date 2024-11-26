@@ -1,1 +1,1 @@
-python source/main.py
+python src/image_classifier.py
