@@ -25,7 +25,9 @@ With **Image Classifier** is possible to:
         - Select the model
     - Train new model:
         - Insert categories
-        - Insert number of images to download for each category 
+        - Insert number of images to download for each category
+
+          The new model will be saved into *models* folder
 
     All the models must have the following name format:
 
